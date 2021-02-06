@@ -1,7 +1,7 @@
-# Open Speed Test K8S Base Manifest
+# PlantUML Server K8S Base Manifest
 
 
-These are the base manifests to deploy [Open Speed Test](http://openspeedtest.com/) to k8s. 
+These are the base manifests to deploy [Plant UML Server](https://hub.docker.com/r/plantuml/plantuml-server) to k8s. 
 
 
 ## Notes
@@ -18,13 +18,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 
-namespace: ost
+namespace: plantuml
 
 commonLabels:
-  app: ost
+  app: plantuml
 
 resources:
-  - github.com/beckje01/ost-k8s/manifests?ref=v0.2
+  - github.com/beckje01/plantuml-k8s/manifests?ref=v0.1
   - ingress.yaml
 ```
 
@@ -33,16 +33,16 @@ ingress.yaml
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ost-ui
+  name: plantuml
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: ost.lab.example
+  - host: plantuml.lab.example
     http:
       paths:
       - backend:
-          serviceName: ost
+          serviceName: plantuml-server
           servicePort: 8080
 ```
 

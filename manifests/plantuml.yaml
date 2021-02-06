@@ -2,25 +2,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ost-server
+  name: plantuml-server
   labels:
-    app.kubernetes.io/name: ost-server   
+    app.kubernetes.io/name: plantuml-server   
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: ost-server
+      app.kubernetes.io/name: plantuml-server
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: ost-server
+        app.kubernetes.io/name: plantuml-server
     spec:
-      serviceAccountName: ost-server
+      serviceAccountName: plantuml-server
       containers:
-      - name: ost-server
-        image: openspeedtest/latest:speedtest
+      - name: plantuml-server
+        image: plantuml/plantuml-server:jetty-v1.2021.1
         ports:
         - name: http
           containerPort: 8080
@@ -39,15 +39,15 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: ost
+  name: plantuml
 spec:
   ports:
     - name: http
       port: 8080
   selector:
-    app.kubernetes.io/name: ost-server
+    app.kubernetes.io/name: plantuml-server
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: ost-server
+  name: plantuml-server
