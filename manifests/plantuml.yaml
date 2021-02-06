@@ -34,7 +34,10 @@ spec:
           valueFrom:
             fieldRef:
               apiVersion: v1
-              fieldPath: metadata.name                                 
+              fieldPath: metadata.name   
+      #Currently the only images are amd64 if you change the image change the node selector. 
+      nodeSelector:
+        kubernetes.io/arch: amd64                                            
 ---
 kind: Service
 apiVersion: v1
